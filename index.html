@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory</title>
+    <link rel="stylesheet" href="dist/css/style.css">
+</head>
+<body>
+    <section id="sectionGame">
+        <div id="divInfo">
+            <h1>Memory Game 🧠</h1>
+            <div id="divTimer">0</div>
+        </div>
+        <div id="divInput">
+            <label for="inputUsername">Username: </label>
+            <input type="text" id="inputUsername">
+            <button id="btnStart">START GAME</button>
+            <button id="btnRestart">RESTART</button>
+        </div>
+        <div id="divDifficulty">
+            <label for="difficultyEasy">Easy:</label>
+            <input type="radio" id="difficultyEasy" name="radioDifficulty" value="4" checked>
+            <label for="difficultyMedium">Medium:</label>
+            <input type="radio" id="difficultyMedium" name="radioDifficulty" value="6">
+            <label for="difficultyHard">Hard:</label>
+            <input type="radio" id="difficultyHard" name="radioDifficulty" value="8">
+            <label for="difficultyExpert">Expert:</label>
+            <input type="radio" id="difficultyExpert" name="radioDifficulty" value="10">
+        </div>
+        <div id="divGame"></div>
+    </section>
+    <section id="sectionTable">
+        <h1>Results:</h1>
+        <button id="btnEasy">Easy</button>
+        <button id="btnMedium">Medium</button>
+        <button id="btnHard">Hard</button>
+        <button id="btnExpert">Expert</button>
+    </section>
+    <script src="js/main.js"></script>
+</body>
+</html>
