@@ -20,6 +20,8 @@ let selectedDifficulty = 0;
 let intervalCountdown = 0;
 let timerCountdownCounter = 0;
 
+let selectedCards = [];
+let pairsCounter = 0;
 
 // FUNCTIONS
 
@@ -91,9 +93,31 @@ btnStart.addEventListener("click", () => {
 divGame.addEventListener("click", (event) => {
     if (event.target.classList.contains("divGameCardBack")) {
         event.target.innerHTML = event.target.getAttribute("value");
+        selectedCards.push(event.target);
+
+        if (selectedCards.length === 2) {
+            if (selectedCards[0].innerHTML !== selectedCards[1].innerHTML) {
+                divGame.classList.add("disabled");
+                setTimeout(() => {
+                    selectedCards[0].innerHTML = "?";
+                    selectedCards[1].innerHTML = "?";
+                    selectedCards = [];
+                    divGame.classList.remove("disabled");
+                }, 1000);
+            } else {
+                selectedCards[0].style.border = "4px green solid";
+                selectedCards[1].style.border = "4px green solid";
+                selectedCards = [];
+                pairsCounter++;
+                console.log(pairsCounter);
+            }
+        }
+    }
+    if (pairsCounter === arrEasy.length / 2) {
+        stopCountdown();
     }
 });
 
 btnRestart.addEventListener("click", () => {
-    stopCountdown();
+    location.reload();
 });
