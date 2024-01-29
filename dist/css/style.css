@@ -66,6 +66,7 @@ body {
 #sectionGame #divInput input {
   border: none;
   height: 24px;
+  font-size: 24px;
 }
 #sectionGame #divInput button {
   padding: 8px 24px;
