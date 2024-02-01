@@ -26,6 +26,16 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@media screen and (max-width: 1024px) {
+  body {
+    flex-direction: column;
+    overflow-x: hidden;
+    justify-content: start;
+  }
+  #sectionGame, #sectionTable {
+    width: 100%;
+  }
+}
 body {
   display: flex;
   flex-direction: row;
