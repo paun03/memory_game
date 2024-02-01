@@ -69,6 +69,7 @@ let checkDifficulty = () => {
 };
 
 let fillOutDivGameDiv = () => {
+    divGame.innerHTML = "";
     for (let i = 0; i < selectedDifficulty; i++) {
         for (let j = 0; j < selectedDifficulty; j++) {
             let div = document.createElement("div");
@@ -81,7 +82,19 @@ let fillOutDivGameDiv = () => {
     }
 };
 
+let checkIfNameIsInserted = () => {
+    if (inputUsername.value === "") {
+        alert("Please Insert Username");
+        location.reload();
+    }
+};
+
+let restartCountdown = () => {
+    timerCountdownCounter = 0;
+};
+
 let startCountdown = () => {
+    clearInterval(intervalCountdown);
     intervalCountdown = setInterval(()=> {
         timerCountdownCounter++;
         console.log(timerCountdownCounter);
@@ -96,9 +109,11 @@ let stopCountdown = () => {
 // EVENTS LISTENERS
 
 btnStart.addEventListener("click", () => {
+    checkIfNameIsInserted();
     checkDifficulty();
     let shuffledArray = shuffle(arrSelected);
     fillOutDivGameDiv();
+    restartCountdown();
     startCountdown();
     fillOutElements(getAllGameDivs(), shuffledArray);
 });

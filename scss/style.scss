@@ -98,3 +98,18 @@ body {
     }
 }
 
+// RESPONSIVE
+
+@media screen and (max-width: 1024px) {
+    body {
+        flex-direction: column;
+        overflow-x: hidden;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #sectionGame, #sectionTable {
+        width: 100%;
+    }
+}
+
