@@ -1,6 +1,9 @@
 // ARRAYS
 
 const arrEasy = ['🐘', '🦒', '🐅', '🦓', '🦌', '🦏', '🐪', '🦔', '🐘', '🦒', '🐅', '🦓', '🦌', '🦏', '🐪', '🦔'];
+const arrMedium = ['🐘', '🦒', '🐅', '🦓', '🦌', '🦏', '🐪', '🦔', '🐘', '🦒', '🐅', '🦓', '🦌', '🦏', '🐪', '🦔', '🐆', '🦉', '🦜', '🐊', '🦛', '🦢', '🐎', '🦗', '🐘', '🦒', '🐅', '🦓', '🦌', '🦏', '🐪', '🦔', '🦓', '🦌', '🦏', '🐪'];
+
+let arrSelected = [];
 
 // DOM
 
@@ -34,8 +37,6 @@ let shuffle = (arr) => {
     return newArray;
 };
 
-let shuffledArrayEasy = shuffle(arrEasy);
-
 let getAllGameDivs = () => {
     let allBackCardDivs = document.querySelectorAll(".divGameCardBack");
     return allBackCardDivs;
@@ -54,6 +55,13 @@ let flipACard = () => {
 
 let checkDifficulty = () => {
     selectedDifficulty = document.querySelector('input[type="radio"]:checked').value;
+    if (Number(selectedDifficulty) === 4) {
+        arrSelected = arrEasy;
+    } else if (Number(selectedDifficulty) === 6) {
+        arrSelected = arrMedium;
+    }
+    console.log(selectedDifficulty);
+    console.log(arrSelected);
 };
 
 let fillOutDivGameDiv = () => {
@@ -85,9 +93,10 @@ let stopCountdown = () => {
 
 btnStart.addEventListener("click", () => {
     checkDifficulty();
+    let shuffledArray = shuffle(arrSelected);
     fillOutDivGameDiv();
     startCountdown();
-    fillOutElements(getAllGameDivs(), shuffledArrayEasy);
+    fillOutElements(getAllGameDivs(), shuffledArray);
 });
 
 divGame.addEventListener("click", (event) => {
@@ -107,13 +116,15 @@ divGame.addEventListener("click", (event) => {
             } else {
                 selectedCards[0].style.border = "4px green solid";
                 selectedCards[1].style.border = "4px green solid";
+                selectedCards[0].classList.add("disabled");
+                selectedCards[1].classList.add("disabled");
                 selectedCards = [];
                 pairsCounter++;
                 console.log(pairsCounter);
             }
         }
     }
-    if (pairsCounter === arrEasy.length / 2) {
+    if (pairsCounter === arrSelected.length / 2) {
         stopCountdown();
     }
 });
