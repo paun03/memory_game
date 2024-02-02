@@ -28,10 +28,16 @@ let timerCountdownCounter = 0;
 let selectedCards = [];
 let pairsCounter = 0;
 
-let btnEasy = document.querySelector("btnEasy");
-let btnMedium = document.querySelector("btnMedium");
-let btnHard = document.querySelector("btnHard");
-let btnExpert = document.querySelector("btnExpert");
+let sectionTable = document.querySelector("#sectionTable");
+let divTable = document.querySelector("#divTable");
+let btnEasy = document.querySelector("#btnEasy");
+let btnMedium = document.querySelector("#btnMedium");
+let btnHard = document.querySelector("#btnHard");
+let btnExpert = document.querySelector("#btnExpert");
+let tableEasy = document.querySelector("#tableEasy");
+let tableMedium = document.querySelector("#tableMedium");
+let tableHard = document.querySelector("#tableHard");
+let tableExpert = document.querySelector("#tableExpert");
 
 // FUNCTIONS
 
@@ -111,9 +117,20 @@ let stopCountdown = () => {
     clearInterval(intervalCountdown);
 };
 
+let appendTableElements = () => {
+    let tr = document.createElement("tr");
+    let tdName = document.createElement("td");
+    let tdDiff = document.createElement("td");
+    let tdTime = document.createElement("td");
+    tdName.innerHTML = inputUsername.value;
+    tr.append(tdName);
+    tableEasy.append(tr);
+};
+
 // EVENTS LISTENERS
 
 btnStart.addEventListener("click", () => {
+    btnStart.classList.add("disabled");
     checkIfNameIsInserted();
     checkDifficulty();
     let shuffledArray = shuffle(arrSelected);
@@ -149,9 +166,34 @@ divGame.addEventListener("click", (event) => {
     }
     if (pairsCounter === arrSelected.length / 2) {
         stopCountdown();
+        
     }
 });
 
 btnRestart.addEventListener("click", () => {
     location.reload();
+});
+
+sectionTable.addEventListener("click", (event) => {
+    if (event.target.id === "btnEasy") {
+        tableEasy.style.display = "block";
+        tableMedium.style.display = "none";
+        tableHard.style.display = "none";
+        tableExpert.style.display = "none";
+    } else if (event.target.id === "btnMedium") {
+        tableEasy.style.display = "none";
+        tableMedium.style.display = "block";
+        tableHard.style.display = "none";
+        tableExpert.style.display = "none";
+    } else if (event.target.id === "btnHard") {
+        tableEasy.style.display = "none";
+        tableMedium.style.display = "none";
+        tableHard.style.display = "block";
+        tableExpert.style.display = "none";
+    } else if (event.target.id === "btnExpert") {
+        tableEasy.style.display = "none";
+        tableMedium.style.display = "none";
+        tableHard.style.display = "none";
+        tableExpert.style.display = "block";
+    }
 });

@@ -83,6 +83,7 @@ body {
 
 #sectionTable {
     width: 50%;
+    align-items: center;
     
     h1 {
         font-size: 48px;
@@ -95,6 +96,40 @@ body {
         color: rgb(40, 40, 128);
         font-weight: bold;
         cursor: pointer;
+    }
+
+    #divTable {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 24px;
+
+        #tableEasy {
+            display: none;
+        }
+
+        #tableMedium {
+            display: none;
+        }
+
+        #tableHard {
+            display: none;
+        }
+
+        #tableExpert {
+            display: none;
+        }
+
+        table {
+
+            border: 1px solid orangered;
+            width: 360px;
+            font-size: 28px;
+        
+            tr {
+                border-bottom: 1px solid orangered;
+            }
+        }
     }
 }
 
