@@ -28,6 +28,11 @@ let timerCountdownCounter = 0;
 let selectedCards = [];
 let pairsCounter = 0;
 
+let btnEasy = document.querySelector("btnEasy");
+let btnMedium = document.querySelector("btnMedium");
+let btnHard = document.querySelector("btnHard");
+let btnExpert = document.querySelector("btnExpert");
+
 // FUNCTIONS
 
 let shuffle = (arr) => {
