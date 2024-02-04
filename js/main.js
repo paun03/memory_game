@@ -30,14 +30,71 @@ let pairsCounter = 0;
 
 let sectionTable = document.querySelector("#sectionTable");
 let divTable = document.querySelector("#divTable");
+
 let btnEasy = document.querySelector("#btnEasy");
 let btnMedium = document.querySelector("#btnMedium");
 let btnHard = document.querySelector("#btnHard");
 let btnExpert = document.querySelector("#btnExpert");
+
 let tableEasy = document.querySelector("#tableEasy");
 let tableMedium = document.querySelector("#tableMedium");
 let tableHard = document.querySelector("#tableHard");
 let tableExpert = document.querySelector("#tableExpert");
+
+let resultsEasy = [];
+let resultsMedium = [];
+let resultsHard = [];
+let resultsExpert = [];
+
+const storedResultsEasy = localStorage.getItem('resultsEasy');
+if (storedResultsEasy) {
+    resultsEasy = JSON.parse(storedResultsEasy);
+}
+
+const storedResultsMedium = localStorage.getItem('resultsMedium');
+if (storedResultsMedium) {
+    resultsMedium = JSON.parse(storedResultsMedium);
+}
+
+const storedResultsHard = localStorage.getItem('resultsHard');
+if (storedResultsHard) {
+    resultsHard = JSON.parse(storedResultsHard);
+}
+
+const storedResultsExpert = localStorage.getItem('resultsExpert');
+if (storedResultsExpert) {
+    resultsExpert = JSON.parse(storedResultsExpert);
+}
+
+
+// CLASS
+
+class Player {
+    constructor(name, time) {
+        this.name = name;
+        this.time = time;
+    }
+
+    // SET
+
+    set name(name) {
+        this._name = name;
+    }
+
+    set time(time) {
+        this._time = time;
+    }
+
+    // GET
+
+    get name() {
+        return this._name;
+    }
+
+    get time() {
+        return this._time;
+    }
+};
 
 // FUNCTIONS
 
@@ -117,15 +174,109 @@ let stopCountdown = () => {
     clearInterval(intervalCountdown);
 };
 
-let appendTableElements = () => {
-    let tr = document.createElement("tr");
-    let tdName = document.createElement("td");
-    let tdDiff = document.createElement("td");
-    let tdTime = document.createElement("td");
-    tdName.innerHTML = inputUsername.value;
-    tr.append(tdName);
-    tableEasy.append(tr);
+let insertTable = () => {
+    let player = new Player(inputUsername.value, timerCountdownCounter);
+    if (Number(selectedDifficulty) === 4) {
+        resultsEasy.push(player);
+        localStorage.setItem('resultsEasy', JSON.stringify(resultsEasy));
+        let tr = document.createElement("tr");
+        let tdName = document.createElement("td");
+        let tdTime = document.createElement("td");
+        tdName.textContent = player.name; 
+        tdTime.textContent = player.time;
+        console.log(player.name);
+        tr.append(tdName, tdTime);
+        tableEasy.append(tr);
+
+    } else if (Number(selectedDifficulty) === 6) {
+        resultsMedium.push(player);
+        localStorage.setItem('resultsMedium', JSON.stringify(resultsMedium));
+        let tr = document.createElement("tr");
+        let tdName = document.createElement("td");
+        let tdTime = document.createElement("td");
+        tdName.textContent = player.name; 
+        tdTime.textContent = player.time; 
+        tr.append(tdName, tdTime);
+        tableMedium.append(tr);
+    } else if (Number(selectedDifficulty) === 6) {
+        resultsHard.push(player);
+        localStorage.setItem('resultsHard', JSON.stringify(resultsHard));
+        let tr = document.createElement("tr");
+        let tdName = document.createElement("td");
+        let tdTime = document.createElement("td");
+        tdName.textContent = player.name; 
+        tdTime.textContent = player.time; 
+        tr.append(tdName, tdTime);
+        tableHard.append(tr);
+    } else if (Number(selectedDifficulty) === 6) {
+        resultsExpert.push(player);
+        localStorage.setItem('resultsExpert', JSON.stringify(resultsExpert));
+        let tr = document.createElement("tr");
+        let tdName = document.createElement("td");
+        let tdTime = document.createElement("td");
+        tdName.textContent = player.name; 
+        tdTime.textContent = player.time; 
+        tr.append(tdName, tdTime);
+        table.append(tr);
+    }
 };
+
+let displayTable = () => {
+    resultsEasy = bubbleSort(resultsEasy);
+    resultsMedium = bubbleSort(resultsMedium);
+    resultsHard = bubbleSort(resultsHard);
+    resultsExpert = bubbleSort(resultsExpert);
+    resultsEasy.forEach(player => {
+        let tr = document.createElement("tr");
+        let tdName = document.createElement("td");
+        let tdTime = document.createElement("td");
+        tdName.innerHTML = player._name; 
+        tdTime.innerHTML = player._time;
+        tr.append(tdName, tdTime);
+        tableEasy.append(tr);
+    });
+    resultsMedium.forEach(player => {
+        let tr = document.createElement("tr");
+        let tdName = document.createElement("td");
+        let tdTime = document.createElement("td");
+        tdName.innerHTML = player._name; 
+        tdTime.innerHTML = player._time; 
+        tr.append(tdName, tdTime);
+        tableMedium.append(tr);
+    });
+    resultsHard.forEach(player => {
+        let tr = document.createElement("tr");
+        let tdName = document.createElement("td");
+        let tdTime = document.createElement("td");
+        tdName.innerHTML = player._name; 
+        tdTime.innerHTML = player._time; 
+        tr.append(tdName, tdTime);
+        tableHard.append(tr);
+    });
+    resultsExpert.forEach(player => {
+        let tr = document.createElement("tr");
+        let tdName = document.createElement("td");
+        let tdTime = document.createElement("td");
+        tdName.innerHTML = player._name; 
+        tdTime.innerHTML = player._time; 
+        tr.append(tdName, tdTime);
+        tableExpert.append(tr);
+    });
+};
+
+let bubbleSort = (arr) => {
+    let len = arr.length;
+    for (let i = 0; i < len - 1; i++) {
+        for (let j = 0; j < len - 1 - i; j++) {
+            if (arr[j]._time > arr[j + 1]._time) {
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    return arr;
+}
 
 // EVENTS LISTENERS
 
@@ -166,7 +317,7 @@ divGame.addEventListener("click", (event) => {
     }
     if (pairsCounter === arrSelected.length / 2) {
         stopCountdown();
-        
+        insertTable(); 
     }
 });
 
@@ -197,3 +348,9 @@ sectionTable.addEventListener("click", (event) => {
         tableExpert.style.display = "block";
     }
 });
+
+window.addEventListener('load', () => {
+    selectedDifficulty = document.querySelector('input[type="radio"]:checked').value;
+    displayTable();
+});
+

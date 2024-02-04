@@ -40,7 +40,7 @@ body {
     }
 
     #divInput {
-        font-size: 32px;
+        font-size: 24px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -65,7 +65,7 @@ body {
     }
 
     #divDifficulty {
-        font-size: 28px;
+        font-size: 24px;
         margin-top: 14px;
         display: flex;
         justify-content: center;
@@ -127,7 +127,14 @@ body {
             font-size: 28px;
         
             tr {
-                border-bottom: 1px solid orangered;
+                
+                display: flex;
+                justify-content: space-between;
+
+                td {
+                    width: 100%;
+                    border: 1px solid orangered;
+                }
             }
         }
     }
